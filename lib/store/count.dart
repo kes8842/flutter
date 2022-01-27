@@ -13,7 +13,6 @@ class Count extends ChangeNotifier {
   QRViewController? _controller;
   Barcode? _barcode;
   bool _scanAble = true;
-  CameraFacing _cameraFace = CameraFacing.front;
 
   String get inputData => _inputData;
 
@@ -24,8 +23,6 @@ class Count extends ChangeNotifier {
   QRViewController? get controller => _controller;
 
   bool get scanAble => _scanAble;
-
-  CameraFacing get cameraFace => _cameraFace;
 
   void setController(controller) async {
     _controller = controller;
@@ -39,10 +36,12 @@ class Count extends ChangeNotifier {
       try {
         Timer(Duration(seconds: 1), () async {
           _barcode = event;
-          await testApi(event);
-          notifyListeners();
-          _controller?.resumeCamera();
 
+          bool callApi = await sendEventData(event.code).catchError((e) {
+            print(e);
+          });
+
+          _controller?.resumeCamera();
           Timer(Duration(seconds: 3), () {
             _barcode = null;
             _scanAble = true;
@@ -50,12 +49,31 @@ class Count extends ChangeNotifier {
           });
         });
       } catch (e) {
+        print('catchevnt');
         print(e);
         _barcode = null;
         _scanAble = true;
         notifyListeners();
       }
     });
+  }
+
+  Future<bool> sendEventData(String? data) async {
+    String memberId = jsonDecode(data!)['phone'];
+    print('send start');
+    print('----------------------------');
+    print(memberId);
+    http.Response res = await http.post("http://3.37.212.202:8080/s0221a0020/enter",
+        headers: {"Content-Type": "application/json"},
+        body: jsonEncode({"memberId": memberId}));
+    print(res.body);
+    print('send end');
+    print('----------------------------');
+    if(res.statusCode == 200) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   Future<void> test() async {

@@ -4,15 +4,19 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 class Login extends ChangeNotifier {
   static final storage = new FlutterSecureStorage();
 
-  String _id = '';
+  Map<String, String> _loginInfo = {
+    'phone': '',
+    'memberId': '',
+    'deviceId': ''
+  };
   String _password = '';
 
-  String get id => _id;
+  Map<String, String> get loginInfo => _loginInfo;
 
   String get password => _password;
 
-  void setId(id) {
-    _id = id;
+  void setLoginInfo(loginInfo) {
+    _loginInfo = {...loginInfo};
   }
 
   void setPw(pw) {
@@ -27,8 +31,8 @@ class Login extends ChangeNotifier {
   Future<bool>? isLogin(context) async {
     String? userInfo = await storage.read(key: 'login');
     if (userInfo != null) {
-      if (id == '') {
-        setId(userInfo);
+      if (loginInfo['phone'] == '') {
+        setLoginInfo({...loginInfo, 'phone': userInfo});
       }
       if (context != null) {
         Navigator.pushNamedAndRemoveUntil(context, '/first', (route) => false);
@@ -43,6 +47,6 @@ class Login extends ChangeNotifier {
   }
 
   Future<void> setLogin() async {
-    storage.write(key: 'login', value: id);
+    storage.write(key: 'login', value: loginInfo['phone']);
   }
 }

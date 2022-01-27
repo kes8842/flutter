@@ -44,7 +44,7 @@ class First extends StatelessWidget {
                                       height: 60,
                                       margin: EdgeInsets.fromLTRB(20, 3, 20, 3),
                                       child: ElevatedButton(
-                                        child: Text('id ${provider2.id}'),
+                                        child: Text('로그아웃'),
                                         onPressed: () async {
                                           await provider2.deleteId();
                                           Navigator.pushNamed(context, '/');

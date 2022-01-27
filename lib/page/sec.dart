@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +24,7 @@ class Sec extends StatelessWidget {
                 child: Column(children: [
                   Container(
                       padding: EdgeInsets.only(top: 20),
-                      child: QrImage(data: loginProvider.id, size: 220)),
+                      child: QrImage(data: jsonEncode(loginProvider.loginInfo), size: 220)),
                 ]),
               ),
             )),

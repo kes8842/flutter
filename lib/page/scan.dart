@@ -19,7 +19,7 @@ class Scan extends StatelessWidget {
           children: [
             QRView(
               key: qrKey,
-              cameraFacing: provider.cameraFace,
+              cameraFacing: CameraFacing.front,
               onQRViewCreated: (controller) {
                 provider.setController(controller);
               },
