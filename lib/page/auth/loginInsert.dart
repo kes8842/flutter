@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import '../store/login.dart';
+import '../../store/login.dart';
 
 class LoginInsert extends StatelessWidget {
   TextStyle textStyle() {
@@ -23,9 +23,9 @@ class LoginInsert extends StatelessWidget {
           height: double.infinity,
           child: SingleChildScrollView(
             child:
-                Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Column(mainAxisAlignment: MainAxisAlignment.start, children: [
               Container(
-                margin: const EdgeInsets.only(top: 100),
+                // margin: const EdgeInsets.only(top: 50),
                 padding: const EdgeInsets.only(left: 30, right: 50),
                 child: TextField(
                   style: textStyle(),
@@ -40,7 +40,7 @@ class LoginInsert extends StatelessWidget {
                 ),
               ),
               Container(
-                margin: const EdgeInsets.only(top: 100),
+                margin: const EdgeInsets.only(top: 50),
                 padding: const EdgeInsets.only(left: 30, right: 50),
                 child: TextField(
                   style: textStyle(),
@@ -54,27 +54,28 @@ class LoginInsert extends StatelessWidget {
                   },
                 ),
               ),
-              Container(
-                margin: const EdgeInsets.only(top: 100),
-                padding: const EdgeInsets.only(left: 30, right: 50),
-                child: TextField(
-                  style: textStyle(),
-                  keyboardType: TextInputType.number,
-                  inputFormatters: <TextInputFormatter>[
-                    FilteringTextInputFormatter.digitsOnly
-                  ],
-                  decoration: const InputDecoration(
-                    labelText: '핸드폰 입력',
-                    border: OutlineInputBorder(),
-                  ),
-                  onChanged: (text) {
-                    loginStore
-                        .setLoginInfo({...provider.loginInfo, 'phone': text});
-                  },
-                ),
-              ),
+              // Container(
+              //   margin: const EdgeInsets.only(top: 50),
+              //   padding: const EdgeInsets.only(left: 30, right: 50),
+              //   child: TextField(
+              //     style: textStyle(),
+              //     keyboardType: TextInputType.number,
+              //     inputFormatters: <TextInputFormatter>[
+              //       FilteringTextInputFormatter.digitsOnly
+              //     ],
+              //     decoration: const InputDecoration(
+              //       labelText: '핸드폰 입력',
+              //       border: OutlineInputBorder(),
+              //     ),
+              //     onChanged: (text) {
+              //       loginStore
+              //           .setLoginInfo({...provider.loginInfo, 'phone': text});
+              //     },
+              //   ),
+              // ),
               Container(
                 margin: EdgeInsets.only(top: 30),
+                width: 100,
                 child: ElevatedButton(
                     onPressed: () {
                       loginStore.setLogin();
@@ -82,6 +83,17 @@ class LoginInsert extends StatelessWidget {
                           context, '/first', (route) => false);
                     },
                     child: Text('로그인')),
+              ),
+              Container(
+                margin: EdgeInsets.only(top: 5),
+                width: 100,
+                child: ElevatedButton(
+                    onPressed: () {
+                      loginStore.setLogin();
+                      Navigator.pushNamedAndRemoveUntil(
+                          context, '/first', (route) => false);
+                    },
+                    child: Text('회원가입')),
               ),
             ]),
           ),

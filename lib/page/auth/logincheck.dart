@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:provider/provider.dart';
-import '../store/login.dart';
+import '../../store/login.dart';
 
 class LoginCheck extends StatelessWidget {
   @override
@@ -19,16 +20,16 @@ class LoginCheck extends StatelessWidget {
                   appBar: AppBar(
                     title: Text('LOGIN'),
                   ),
-                  body: Container(
-                    child: SingleChildScrollView(
-                      child: Column(children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 100),
-                          height: 40,
-                          child: Text('로그인체크중'),
+                  body: SingleChildScrollView(
+                    child: Column(children: [
+                      Container(
+                        margin: EdgeInsets.only(top: 100),
+                        height: 40,
+                        child: SpinKitRing(
+                          color: Colors.blue,
                         ),
-                      ]),
-                    ),
+                      ),
+                    ]),
                   )),
             );
           });
