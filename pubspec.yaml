@@ -38,7 +38,7 @@ dependencies:
   fluttertoast: ^7.1.6
   device_info_plus: ^0.7.2
   flutter_spinkit: ^4.1.2
-
+  adobe_xd: ^2.0.1
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -61,6 +61,11 @@ dev_dependencies:
 flutter:
   assets:
     - assets/
+    - assets/images/hand.png
+    - assets/images/documents.png
+    - assets/images/qrcode.png
+    - assets/images/1.png
+    - assets/images/2.png
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
